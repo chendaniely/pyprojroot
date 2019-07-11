@@ -1,13 +1,18 @@
-from setuptools import setup
+import setuptools
 
-setup(
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+setuptools.setup(
     name="pyprojroot",
-    version="0.1.0",
+    version="0.1.1",
     description="Find project root paths and return relative project files",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author="Daniel Chen",
     author_email="chendaniely@gmail.com",
     url="https://github.com/chendaniely/pyprojroot",
-    packages=["pyprojroot"],
+    packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
