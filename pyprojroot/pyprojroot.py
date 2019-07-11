@@ -10,14 +10,14 @@ def pyprojroot(p, proj_files):
     return pyprojroot(p.parent, proj_files)
 
 
-def here(rel_proj_path, proj_files=['.git', '.here', '*.Rproj']):
+def here(rel_proj_path='.',
+         proj_files=['.git', '.here', '*.Rproj', 'requirements.txt', 'setup.py']):
     proj_path = pyprojroot(pl.Path('.').cwd(), proj_files)
 
     pth = proj_path / rel_proj_path
-    pth_str = str(pth)
 
     if pth.exists():
-        return pth_str
+        return pth
     else:
         warnings.warn(f"Path doesn't exist: {pth}")
-        return pth_str
+        return pth
