@@ -19,5 +19,5 @@ def here(rel_proj_path='.',
     if pth.exists():
         return pth
     else:
-        warnings.warn(f"Path doesn't exist: {pth}")
+        warnings.warn("Path doesn't exist: {}".format(pth))
         return pth
