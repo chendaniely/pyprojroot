@@ -19,6 +19,7 @@ def here(
         "requirements.txt",
         "setup.py",
         ".dvc",
+        ".spyproject",
     ],
 ):
     proj_path = pyprojroot(pl.Path(".").cwd(), proj_files)
