@@ -1,9 +1,9 @@
-from typing import List
+from typing import Tuple
 import pathlib as pl
 import warnings
 
 
-def py_project_root(path: pl.Path, project_files: List) -> pl.Path:
+def py_project_root(path: pl.Path, project_files: Tuple) -> pl.Path:
     """
     Recursively searches for project files in the current working directory to find
     the project root of the python project.
