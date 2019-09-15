@@ -18,7 +18,19 @@ def py_project_root(path: pl.Path, project_files: Tuple) -> pl.Path:
     return py_project_root(path.parent, project_files)
 
 
-def here(project_files=(".git", "requirements.txt"), relative_project_path='.') -> pl.Path:
+def here(
+        relative_project_path='.',
+        project_files=(
+                ".git",
+                ".here",
+                ".Rproj",
+                "requirements.txt",
+                "setup.py",
+                ".dvc",
+                ".spyproject",
+                "pyproject.toml"
+        ),
+    ) -> pl.Path:
     """
     Returns the directory relative to the projects root directory.
     :param project_files: list of files to track inside the project
