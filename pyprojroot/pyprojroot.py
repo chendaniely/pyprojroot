@@ -11,7 +11,7 @@ def pyprojroot(p, proj_files):
 
 
 def here(rel_proj_path='.',
-         proj_files=['.git', '.here', '*.Rproj', 'requirements.txt', 'setup.py']):
+         proj_files=['.git', '.here', '*.Rproj', '.idea', 'requirements.txt', 'setup.py']):
     proj_path = pyprojroot(pl.Path('.').cwd(), proj_files)
 
     pth = proj_path / rel_proj_path
