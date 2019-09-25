@@ -1,7 +1,9 @@
-from pyprojroot import __version__, here
-import os
-import pytest
+from os import chdir
 from pathlib import Path
+
+import pytest
+
+from pyprojroot import __version__, here
 
 
 def test_version():
@@ -9,33 +11,26 @@ def test_version():
 
 
 @pytest.mark.parametrize(
-    "proj_file",
-    [
-        ".git",
-        ".here",
-        "my_project.Rproj",
-        "requirements.txt",
-        "setup.py",
-        ".dvc",
-    ],
+    "project_files",
+    (".git", ".here", "my_project.Rproj", "requirements.txt", "setup.py", ".dvc"),
 )
 @pytest.mark.parametrize("child_dir", ["stuff", "src", "data", "data/hello"])
-def test_here(tmpdir, proj_file, child_dir):
+def test_here(tmpdir, project_files, child_dir):
     """
     This test uses pytest's tmpdir facilities to create a simulated project
     directory, and checks that the path is correct.
     """
-    # Make proj_file
-    tmpdir = Path(tmpdir)
-    p = tmpdir / proj_file
-    with p.open("w") as fpath:
-        fpath.write("blah")
+    # Create project file
+    temp_dir = Path(tmpdir)
+    path = temp_dir / project_files
+    with path.open("w") as file_path:
+        file_path.write("blah")
 
-    # Make child dirs
-    (tmpdir / child_dir).mkdir(parents=True)
-    os.chdir(tmpdir / child_dir)
-    assert os.getcwd() == str(tmpdir / child_dir)
+    # Create child dirs
+    (temp_dir / child_dir).mkdir(parents=True)
+    chdir(temp_dir / child_dir)
+    assert Path().cwd() == (temp_dir / child_dir)
 
-    # Check that proj
-    path = here()
-    assert path == tmpdir
+    # Verify the project against current work directory
+    current_path = here()
+    assert current_path == temp_dir
