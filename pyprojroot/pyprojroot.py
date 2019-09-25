@@ -28,7 +28,9 @@ def here(
                 "setup.py",
                 ".dvc",
                 ".spyproject",
-                "pyproject.toml"
+                "pyproject.toml",
+                ".idea",
+                ".vscode"
         ),
     ) -> pl.Path:
     """
