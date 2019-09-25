@@ -1,9 +1,9 @@
 from typing import Tuple
-import pathlib as pl
+from pathlib import Path
 import warnings
 
 
-def py_project_root(path: pl.Path, project_files: Tuple) -> pl.Path:
+def py_project_root(path: Path, project_files: Tuple) -> Path:
     """
     Recursively searches for project files in the current working directory to find
     the project root of the python project.
@@ -32,14 +32,14 @@ def here(
         ".idea",
         ".vscode",
     ),
-) -> pl.Path:
+) -> Path:
     """
     Returns the directory relative to the projects root directory.
     :param project_files: list of files to track inside the project
     :param relative_project_path:
     :return: pathlib path
     """
-    project_path = py_project_root(pl.Path(".").cwd(), project_files)
+    project_path = py_project_root(Path(".").cwd(), project_files)
     path = project_path.joinpath(relative_project_path)
 
     if path.exists():
