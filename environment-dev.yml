@@ -1,0 +1,9 @@
+name: pyprojroot-dev
+channels:
+- conda-forge
+dependencies:
+- python=3.7
+- pytest=5.1.2
+- black=19.3b0
+- mypy=0.720
+- flake8=3.7.8
