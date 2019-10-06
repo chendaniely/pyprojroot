@@ -32,11 +32,13 @@ def here(
         ".idea",
         ".vscode",
     ),
+    warn=True
 ) -> Path:
     """
     Returns the directory relative to the projects root directory.
+    :param relative_project_path: relative path from project root
     :param project_files: list of files to track inside the project
-    :param relative_project_path:
+    :param warn: warn user if path does not exist
     :return: pathlib path
     """
     project_path = py_project_root(Path(".").cwd(), project_files)
@@ -45,5 +47,6 @@ def here(
     if path.exists():
         return path
     else:
-        warnings.warn("Path doesn't exist: {}".format(path))
+        if warn:
+            warnings.warn("Path doesn't exist: {}".format(path))
         return path
