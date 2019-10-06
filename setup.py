@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyprojroot",
-    version="0.1.2",
+    version="0.2.0",
     description="Find project root paths and return relative project files",
     long_description=long_description,
     long_description_content_type="text/markdown",
