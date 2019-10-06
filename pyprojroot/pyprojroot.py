@@ -5,8 +5,8 @@ import warnings
 
 def py_project_root(path: Path, project_files: Tuple) -> Path:
     """
-    Recursively searches for project files in the current working directory to find
-    the project root of the python project.
+    Recursively searches for project files in the current working directory
+    to find the project root of the python project.
     :param path: pathlib path object
     :param project_files: list of to track project files
     :return: pathlib path
