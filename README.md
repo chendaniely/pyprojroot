@@ -24,8 +24,16 @@ Great for reading and writing datasets!
 
 ## Installation
 
+### pip
 ```bash
 pip install pyprojroot
+```
+
+### conda
+https://anaconda.org/conda-forge/pyprojroot
+
+```bash
+conda install -c conda-forge pyprojroot 
 ```
 
 ## Usage
