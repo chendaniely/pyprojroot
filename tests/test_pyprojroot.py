@@ -7,7 +7,7 @@ from pyprojroot import __version__, here
 
 
 def test_version() -> None:
-    assert __version__ == "0.1.0"
+    assert __version__ == "0.2.0"
 
 
 @pytest.mark.parametrize(
