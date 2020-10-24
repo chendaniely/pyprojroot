@@ -19,9 +19,9 @@ jobs:
         $CONDA/bin/conda env update --file environment-dev.yml --name base
     - name: Lint
       run: |
-        $CONDA/bin/conda activate base
+        export PATH="${CONDA}/bin:${PATH}"
         make lint
     - name: Test with pytest
       run: |
-        $CONDA/bin/conda activate base
+        export PATH="${CONDA}/bin:${PATH}"
         make test
