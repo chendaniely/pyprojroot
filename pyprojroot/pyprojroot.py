@@ -3,7 +3,7 @@ from pathlib import Path
 import warnings
 
 
-def py_project_root(path: Path, project_files: Tuple) -> Path:
+def py_project_root(path: Path, project_files: Tuple[str, ...]) -> Path:
     """
     Recursively searches for project files in the current working directory
     to find the project root of the python project.
@@ -19,8 +19,8 @@ def py_project_root(path: Path, project_files: Tuple) -> Path:
 
 
 def here(
-    relative_project_path=".",
-    project_files=(
+    relative_project_path: str = ".",
+    project_files: Tuple[str, ...] = (
         ".git",
         ".here",
         "*.Rproj",
@@ -32,7 +32,7 @@ def here(
         ".idea",
         ".vscode",
     ),
-    warn=True
+    warn: bool = True,
 ) -> Path:
     """
     Returns the directory relative to the projects root directory.

@@ -1,0 +1,27 @@
+name: Python Package using Conda
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dev dependencies
+      run: |
+        $CONDA/bin/conda env update --file environment-dev.yml --name base
+    - name: Lint
+      run: |
+        export PATH="${CONDA}/bin:${PATH}"
+        make lint
+    - name: Test with pytest
+      run: |
+        export PATH="${CONDA}/bin:${PATH}"
+        make test

@@ -13,6 +13,7 @@ setuptools.setup(
     author_email="chendaniely@gmail.com",
     url="https://github.com/chendaniely/pyprojroot",
     packages=setuptools.find_packages(),
+    package_data={"pyprojroot": ["py.typed"]},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
