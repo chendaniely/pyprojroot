@@ -20,4 +20,4 @@ fmt:
 
 .PHONY: test
 test:
-	python -m pytest
+	PYTHONPATH="src" python -m pytest
