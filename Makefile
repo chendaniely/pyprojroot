@@ -10,9 +10,9 @@ test_install:
 
 .PHONY: lint
 lint:
-	python -m mypy --strict pyprojroot
-	python -m flake8 pyprojroot tests
-	python -m black --check --diff pyprojroot tests
+	python -m mypy --strict src/pyprojroot
+	python -m flake8 src/pyprojroot tests
+	python -m black --check --diff src/pyprojroot tests
 
 .PHONY: fmt
 fmt:
