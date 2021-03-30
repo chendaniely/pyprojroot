@@ -5,18 +5,20 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyprojroot",
-    version="0.2.0",
-    description="Find project root paths and return relative project files",
+    version="0.3.0",
+    description="Project-oriented workflow in Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Daniel Chen",
     author_email="chendaniely@gmail.com",
     url="https://github.com/chendaniely/pyprojroot",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(where="src"),
+    package_dir={"": "src"},
     package_data={"pyprojroot": ["py.typed"]},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-    ]
+    ],
+    python_requires=">=3.6",
 )
