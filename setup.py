@@ -12,7 +12,8 @@ setuptools.setup(
     author="Daniel Chen",
     author_email="chendaniely@gmail.com",
     url="https://github.com/chendaniely/pyprojroot",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(where="src"),
+    package_dir={"": "src"},
     package_data={"pyprojroot": ["py.typed"]},
     classifiers=[
         "Programming Language :: Python :: 3",
