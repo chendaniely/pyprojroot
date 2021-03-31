@@ -10,14 +10,14 @@ test_install:
 
 .PHONY: lint
 lint:
-	python -m mypy --strict src/pyprojroot
+	python -m mypy src/pyprojroot
 	python -m flake8 src/pyprojroot tests
 	python -m black --check --diff src/pyprojroot tests
 
 .PHONY: fmt
 fmt:
-	python -m black pyprojroot tests
+	python -m black src/pyprojroot tests
 
 .PHONY: test
 test:
-	python -m pytest
+	PYTHONPATH="src" python -m pytest
