@@ -4,26 +4,27 @@ See https://github.com/r-lib/rprojroot.
 
 It is intended for interactive or programmatic only.
 """
+__all__ = ["as_start_path", "find_root_with_reason", "find_root"]
 
-import pathlib as _pathlib
-import typing as _typing
-from os import PathLike as _PathLike
+from os import PathLike
+from pathlib import Path
+from typing import Tuple, Optional, Union
 
-from .criterion import as_root_criterion as _as_root_criterion
+from .criterion import as_root_criterion, Criterion, CriterionFunction
 
 
-def as_start_path(start: _PathLike) -> _pathlib.Path:
+def as_start_path(start: Optional[Union["PathLike[str]"]]) -> Path:
     if start is None:
-        return _pathlib.Path.cwd()
-    if not isinstance(start, _pathlib.Path):
-        start = _pathlib.Path(start)
+        return Path.cwd()
+    if not isinstance(start, Path):
+        start = Path(start)
     # TODO: consider `start = start.resolve()`
     return start
 
 
 def find_root_with_reason(
-    criterion, start: _PathLike = None
-) -> _typing.Tuple[_pathlib.Path, str]:
+    criterion: Criterion, start: Optional["PathLike[str]"] = None
+) -> Tuple[Path, str]:
     """
     Find directory matching root criterion with reason.
 
@@ -33,25 +34,25 @@ def find_root_with_reason(
     # TODO: Implement reasons
 
     # Prepare inputs
-    criterion = _as_root_criterion(criterion)
-    start = as_start_path(start)
+    root_criterion: CriterionFunction = as_root_criterion(criterion)
+    start_path: Path = as_start_path(start)
 
     # Check start
-    if start.is_dir() and criterion(start):
-        return start, "Pass"
+    if start_path.is_dir() and root_criterion(start_path):
+        return start_path, "Pass"
 
     # Iterate over all parents
     # TODO: Consider adding maximum depth
     # TODO: Consider limiting depth to path (e.g. "if p == stop: raise")
-    for p in start.parents:
-        if criterion(p):
+    for p in start_path.parents:
+        if root_criterion(p):
             return p, "Pass"
 
     # Not found
     raise RuntimeError("Project root not found.")
 
 
-def find_root(criterion, start: _PathLike = None, **kwargs) -> _pathlib.Path:
+def find_root(criterion: Criterion, start: Optional["PathLike[str]"] = None) -> Path:
     """
     Find directory matching root criterion.
 
@@ -59,7 +60,7 @@ def find_root(criterion, start: _PathLike = None, **kwargs) -> _pathlib.Path:
     matching root criterion.
     """
     try:
-        root, _ = find_root_with_reason(criterion, start=start, **kwargs)
+        root, _ = find_root_with_reason(criterion, start)
     except RuntimeError as ex:
         raise ex
     else:

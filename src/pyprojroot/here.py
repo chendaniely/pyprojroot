@@ -5,12 +5,15 @@ See https://github.com/r-lib/here.
 It is intended for interactive use only.
 """
 
-import pathlib as _pathlib
-import warnings as _warnings
-from os import PathLike as _PathLike
+__all__ = ["CRITERIA", "get_here", "here"]
+
+from os import PathLike
+from pathlib import Path
+from typing import Union
+from warnings import warn
 
 from . import criterion
-from .root import find_root, find_root_with_reason
+from .root import find_root_with_reason
 
 CRITERIA = [
     criterion.has_file(".here"),
@@ -28,7 +31,7 @@ CRITERIA = [
 
 def get_here():
     # TODO: This should only find_root once per session
-    start = _pathlib.Path.cwd()
+    start = Path.cwd()
     path, reason = find_root_with_reason(CRITERIA, start=start)
     return path, reason
 
@@ -36,7 +39,9 @@ def get_here():
 # TODO: Implement set_here
 
 
-def here(relative_project_path: _PathLike = "", warn_missing=False) -> _pathlib.Path:
+def here(
+    relative_project_path: Union[str, "PathLike[str]"] = "", warn_missing=False
+) -> Path:
     """
     Returns the path relative to the projects root directory.
     :param relative_project_path: relative path from project root
@@ -51,5 +56,5 @@ def here(relative_project_path: _PathLike = "", warn_missing=False) -> _pathlib.
         path = path / relative_project_path
 
     if warn_missing and not path.exists():
-        _warnings.warn(f"Path doesn't exist: {path!s}")
+        warn(f"Path doesn't exist: {path!s}")
     return path
