@@ -10,7 +10,7 @@ import warnings as _warnings
 from os import PathLike as _PathLike
 
 from . import criterion
-from .root import find_root, find_root_with_reason
+from .root import find_root_with_reason
 
 CRITERIA = [
     criterion.has_file(".here"),
