@@ -43,7 +43,7 @@ def as_root_criterion(
             if isinstance(c, _PathLike):
                 if (path / c).exists():
                     return True
-            if callable(c):
+            else:
                 if c(path):
                     return True
         return False
