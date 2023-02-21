@@ -36,7 +36,6 @@ def as_root_criterion(
     if isinstance(criterion, _PathLike):
         criterion_collection = [criterion]
     else:
-
         criterion_collection = list(criterion)  # type: ignore[arg-type]
 
     def f(path: _pathlib.Path) -> bool:

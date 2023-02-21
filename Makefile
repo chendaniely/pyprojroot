@@ -16,8 +16,8 @@ lint:
 
 .PHONY: fmt
 fmt:
-	python -m black pyprojroot tests
+	python -m black src/pyprojroot tests
 
 .PHONY: test
 test:
-	python -m pytest
+	PYTHONPATH=src python -m pytest
