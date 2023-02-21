@@ -33,14 +33,14 @@ def as_root_criterion(
         return criterion
 
     # criterion must be a Collection, rather than just Iterable
-    if isinstance(criterion, _PathLike):
+    if isinstance(criterion, (_PathLike, str)):
         criterion_collection = [criterion]
     else:
         criterion_collection = list(criterion)  # type: ignore[arg-type]
 
     def f(path: _pathlib.Path) -> bool:
         for c in criterion_collection:
-            if isinstance(c, _PathLike):
+            if isinstance(c, (_PathLike, str)):
                 if (path / c).exists():
                     return True
             else:

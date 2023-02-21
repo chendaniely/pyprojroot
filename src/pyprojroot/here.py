@@ -43,7 +43,6 @@ def here(
     """
     Returns the path relative to the projects root directory.
     :param relative_project_path: relative path from project root
-    :param project_files: list of files to track inside the project
     :param warn_missing: warn user if path does not exist (default=False)
     :return: pathlib path
     """
