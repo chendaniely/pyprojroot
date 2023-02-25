@@ -7,12 +7,15 @@ It is intended for interactive or programmatic only.
 
 import pathlib as _pathlib
 import typing as _typing
-from os import PathLike as _PathLike
 
-from .criterion import as_root_criterion as _as_root_criterion
+from .criterion import (
+    as_root_criterion as _as_root_criterion,
+    _CriterionType,
+    _PathType,
+)
 
 
-def as_start_path(start: _PathLike) -> _pathlib.Path:
+def as_start_path(start: _typing.Union[None, _PathType]) -> _pathlib.Path:
     if start is None:
         return _pathlib.Path.cwd()
     if not isinstance(start, _pathlib.Path):
@@ -22,7 +25,8 @@ def as_start_path(start: _PathLike) -> _pathlib.Path:
 
 
 def find_root_with_reason(
-    criterion, start: _PathLike = None
+    criterion: _CriterionType,
+    start: _typing.Union[None, _PathType] = None,
 ) -> _typing.Tuple[_pathlib.Path, str]:
     """
     Find directory matching root criterion with reason.
@@ -51,7 +55,10 @@ def find_root_with_reason(
     raise RuntimeError("Project root not found.")
 
 
-def find_root(criterion, start: _PathLike = None, **kwargs) -> _pathlib.Path:
+def find_root(
+    criterion: _CriterionType,
+    start: _typing.Union[None, _PathType] = None,
+) -> _pathlib.Path:
     """
     Find directory matching root criterion.
 
@@ -59,7 +66,7 @@ def find_root(criterion, start: _PathLike = None, **kwargs) -> _pathlib.Path:
     matching root criterion.
     """
     try:
-        root, _ = find_root_with_reason(criterion, start=start, **kwargs)
+        root, _ = find_root_with_reason(criterion, start=start)
     except RuntimeError as ex:
         raise ex
     else:

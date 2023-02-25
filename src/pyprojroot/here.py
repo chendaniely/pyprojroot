@@ -7,10 +7,11 @@ It is intended for interactive use only.
 
 import pathlib as _pathlib
 import warnings as _warnings
-from os import PathLike as _PathLike
+import typing
 
 from . import criterion
-from .root import find_root, find_root_with_reason
+from .root import find_root_with_reason
+
 
 CRITERIA = [
     criterion.has_file(".here"),
@@ -26,7 +27,7 @@ CRITERIA = [
 ]
 
 
-def get_here():
+def get_here() -> typing.Tuple[_pathlib.Path, str]:
     # TODO: This should only find_root once per session
     start = _pathlib.Path.cwd()
     path, reason = find_root_with_reason(CRITERIA, start=start)
@@ -36,11 +37,12 @@ def get_here():
 # TODO: Implement set_here
 
 
-def here(relative_project_path: _PathLike = "", warn_missing=False) -> _pathlib.Path:
+def here(
+    relative_project_path: criterion._PathType = "", warn_missing: bool = False
+) -> _pathlib.Path:
     """
     Returns the path relative to the projects root directory.
     :param relative_project_path: relative path from project root
-    :param project_files: list of files to track inside the project
     :param warn_missing: warn user if path does not exist (default=False)
     :return: pathlib path
     """
