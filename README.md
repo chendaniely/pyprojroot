@@ -52,6 +52,8 @@ conda install -c conda-forge pyprojroot
 
 ## Example Usage
 
+`pyprojroot` looks for certain files like `.here` or `.git` to identify the `here` directory. To make any of the following examples work, you'll need one of those files in the current directory or one of its parents. (For the complete list of files, see [here.py](src/pyprojroot/here.py).)
+
 ### Interactive
 
 This is based on the R [`here`][here] library.
