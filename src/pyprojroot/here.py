@@ -1,4 +1,5 @@
-"""
+"""Convenience to find the path for a file or directory relative to the root.
+
 This module is inspired by the `here` library for R.
 See https://github.com/r-lib/here.
 
@@ -28,7 +29,7 @@ CRITERIA = [
 
 
 def get_here() -> Tuple[Path, str]:
-    # TODO: This should only find_root once per session
+    """Return a tuple with the root path and a reason"""
     start = Path.cwd()
     path, reason = find_root_with_reason(CRITERIA, start=start)
     return path, reason
@@ -42,12 +43,14 @@ def here(
 ) -> Path:
     """
     Returns the path relative to the projects root directory.
+
     :param relative_project_path: relative path from project root
     :param warn_missing: warn user if path does not exist (default=False)
     :return: pathlib path
+
+    Note: `reason` is not yet implemented.
     """
     path, reason = get_here()
-    # TODO: Show reason when requested
 
     if relative_project_path:
         path = path / relative_project_path

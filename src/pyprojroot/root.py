@@ -3,6 +3,8 @@ This module is inspired by the `rprojroot` library for R.
 See https://github.com/r-lib/rprojroot.
 
 It is intended for interactive or programmatic only.
+
+NOTE: `reason` is not fully implemented.
 """
 
 from pathlib import Path
@@ -33,8 +35,9 @@ def find_root_with_reason(
 
     Recursively search parents of start path for directory
     matching root criterion with reason.
+
+    NOTE: `reason` is not fully implemented.
     """
-    # TODO: Implement reasons
 
     # Prepare inputs
     criterion = _as_root_criterion(criterion)
@@ -45,13 +48,10 @@ def find_root_with_reason(
         return start, "Pass"
 
     # Iterate over all parents
-    # TODO: Consider adding maximum depth
-    # TODO: Consider limiting depth to path (e.g. "if p == stop: raise")
     for p in start.parents:
         if criterion(p):
             return p, "Pass"
 
-    # Not found
     raise RuntimeError("Project root not found.")
 
 

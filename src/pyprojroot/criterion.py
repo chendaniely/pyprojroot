@@ -1,4 +1,5 @@
-"""
+"""Set and use criteria to find the project root.
+
 This module is inspired by the `rprojroot` library for R.
 See https://github.com/r-lib/rprojroot.
 
@@ -19,11 +20,6 @@ _CriterionType = Union[
     Iterable[Callable[[_PathType], bool]],
     Iterable[Callable[[Path], bool]],
 ]
-
-# TODO: It would be nice to have a class that encapsulates these checks,
-# so that we can implement methods like |, !, &, ^ operators
-
-# TODO: Refactor in a way that allows creation of reasons
 
 
 def as_root_criterion(
