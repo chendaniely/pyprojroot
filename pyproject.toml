@@ -28,6 +28,8 @@ dev = [
     "black~=19.3b0",
     "mypy~=0.720",
     "flake8~=3.8.4",
+    "twine~=4.0.2",
+    "build"~=0.10.0",
 ]
 test = [
     "pytest~=6.1.1",
