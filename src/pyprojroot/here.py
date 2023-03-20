@@ -5,9 +5,9 @@ See https://github.com/r-lib/here.
 It is intended for interactive use only.
 """
 
-import pathlib as _pathlib
-import warnings as _warnings
-import typing
+import warnings
+from pathlib import Path
+from typing import Tuple
 
 from . import criterion
 from .root import find_root_with_reason
@@ -27,9 +27,9 @@ CRITERIA = [
 ]
 
 
-def get_here() -> typing.Tuple[_pathlib.Path, str]:
+def get_here() -> Tuple[Path, str]:
     # TODO: This should only find_root once per session
-    start = _pathlib.Path.cwd()
+    start = Path.cwd()
     path, reason = find_root_with_reason(CRITERIA, start=start)
     return path, reason
 
@@ -39,7 +39,7 @@ def get_here() -> typing.Tuple[_pathlib.Path, str]:
 
 def here(
     relative_project_path: criterion._PathType = "", warn_missing: bool = False
-) -> _pathlib.Path:
+) -> Path:
     """
     Returns the path relative to the projects root directory.
     :param relative_project_path: relative path from project root
@@ -53,5 +53,5 @@ def here(
         path = path / relative_project_path
 
     if warn_missing and not path.exists():
-        _warnings.warn(f"Path doesn't exist: {path!s}")
+        warnings.warn(f"Path doesn't exist: {path!s}")
     return path

@@ -5,8 +5,8 @@ See https://github.com/r-lib/rprojroot.
 It is intended for interactive or programmatic only.
 """
 
-import pathlib as _pathlib
-import typing as _typing
+from pathlib import Path
+from typing import Union, Tuple
 
 from .criterion import (
     as_root_criterion as _as_root_criterion,
@@ -15,19 +15,19 @@ from .criterion import (
 )
 
 
-def as_start_path(start: _typing.Union[None, _PathType]) -> _pathlib.Path:
+def as_start_path(start: Union[None, _PathType]) -> Path:
     if start is None:
-        return _pathlib.Path.cwd()
-    if not isinstance(start, _pathlib.Path):
-        start = _pathlib.Path(start)
+        return Path.cwd()
+    if not isinstance(start, Path):
+        start = Path(start)
     # TODO: consider `start = start.resolve()`
     return start
 
 
 def find_root_with_reason(
     criterion: _CriterionType,
-    start: _typing.Union[None, _PathType] = None,
-) -> _typing.Tuple[_pathlib.Path, str]:
+    start: Union[None, _PathType] = None,
+) -> Tuple[Path, str]:
     """
     Find directory matching root criterion with reason.
 
@@ -57,8 +57,8 @@ def find_root_with_reason(
 
 def find_root(
     criterion: _CriterionType,
-    start: _typing.Union[None, _PathType] = None,
-) -> _pathlib.Path:
+    start: Union[None, _PathType] = None,
+) -> Path:
     """
     Find directory matching root criterion.
 
