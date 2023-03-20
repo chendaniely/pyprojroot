@@ -6,7 +6,7 @@ It is intended for interactive or programmatic only.
 """
 
 from pathlib import Path
-from typing import Union, Tuple
+from typing import Union, Tuple, Optional
 
 from .criterion import (
     as_root_criterion as _as_root_criterion,
@@ -15,13 +15,9 @@ from .criterion import (
 )
 
 
-def as_start_path(start: Union[None, _PathType]) -> Path:
-    if start is None:
-        return Path.cwd()
-    if not isinstance(start, Path):
-        start = Path(start)
-    # TODO: consider `start = start.resolve()`
-    return start
+def as_start_path(start: Optional[_PathType]) -> Path:
+    """A pathlib.Path object based on the common working directory or the optional input provided."""
+    return Path.cwd() if start is None else Path(start)
 
 
 def find_root_with_reason(
