@@ -32,7 +32,7 @@ dev = [
     "build~=0.10.0",
 ]
 test = [
-    "pytest~=6.1.1",
+    "pytest>=6.2.5",
 ]
 
 [project.urls]
