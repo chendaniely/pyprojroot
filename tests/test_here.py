@@ -28,7 +28,7 @@ def test_here(tmp_path, project_files, file_type, child_dir):
     elif file_type == "dir":
         (tmp_path / project_files).mkdir(parents=True)
     else:
-        raise ValueError("Invalid input: {file_type}")
+        raise ValueError(f"Invalid input: {file_type}")
 
     # Create child dirs
     start_dir = tmp_path / child_dir
