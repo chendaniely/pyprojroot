@@ -1,10 +1,10 @@
-from typing import deprecated as _deprecated
+from deprecated import deprecated as _deprecated
 
 from .criterion import as_root_criterion, has_dir, has_file
 from .root import find_root, find_root_with_reason
 
 
-@_deprecated("Use `from pyprojroot.here import here` instead.")
+@_deprecated(version="0.4.0", reason="Use `from pyprojroot.here import here` instead.")
 def here(*args, **kwargs):
     from .here import here as h
 
