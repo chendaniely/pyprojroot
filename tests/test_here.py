@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from src.pyprojroot.here import here
+from pyprojroot.here import here
 
 
 @pytest.mark.parametrize(

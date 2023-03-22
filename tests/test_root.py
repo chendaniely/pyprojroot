@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from src.pyprojroot.root import as_start_path, find_root
+from pyprojroot.root import as_start_path, find_root
 
 MARKER = ".here"
 
