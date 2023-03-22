@@ -16,18 +16,10 @@ from .criterion import (
 
 
 def as_start_path(start: Optional[_PathType]) -> Path:
-    """
-    Returns a Path object based on the current working directory or the optional input
-    provided. If the input `start` parameter contains the '~' character, it will be
-    expanded to the home directory before being returned.
-
-    :param start: Optional[str or Path], the path to start from. Defaults to None
-                  which sets the starting path to the current working directory.
-    :return: Path, the Path object based on the starting path.
-    """
+    """Convert path argument into normalised Path object."""
     if start is not None:
-        return Path(start).expanduser()
-    return Path.cwd()
+        return Path(start).expanduser().resolve()
+    return Path.cwd().resolve()
 
 
 def find_root_with_reason(
