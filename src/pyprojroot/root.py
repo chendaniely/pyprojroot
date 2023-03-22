@@ -16,8 +16,18 @@ from .criterion import (
 
 
 def as_start_path(start: Optional[_PathType]) -> Path:
-    """A pathlib.Path object based on the common working directory or the optional input provided."""
-    return Path.cwd() if start is None else Path(start)
+    """
+    Returns a Path object based on the current working directory or the optional input 
+    provided. If the input `start` parameter contains the '~' character, it will be 
+    expanded to the home directory before being returned.
+    
+    :param start: Optional[str or Path], the path to start from. Defaults to None 
+                  which sets the starting path to the current working directory.
+    :return: Path, the Path object based on the starting path.
+    """
+    if start is not None:
+        return Path(start).expanduser()
+    return Path.cwd()
 
 
 def find_root_with_reason(
@@ -35,7 +45,6 @@ def find_root_with_reason(
     # Prepare inputs
     criterion = _as_root_criterion(criterion)
     start = as_start_path(start)
-
     # Check start
     if start.is_dir() and criterion(start):
         return start, "Pass"
