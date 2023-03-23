@@ -2,7 +2,7 @@
 
 This is explicitly providing the 0.2.0 version's interface of pyprojroot
 and marked deprecated
-""" 
+"""
 
 import warnings
 from pathlib import Path
