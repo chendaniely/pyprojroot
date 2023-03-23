@@ -8,7 +8,7 @@ NOTE: `reason` is not fully implemented.
 """
 
 from pathlib import Path
-from typing import Union, Tuple
+from typing import Union, Tuple, Optional
 
 from .criterion import (
     as_root_criterion as _as_root_criterion,
@@ -17,13 +17,11 @@ from .criterion import (
 )
 
 
-def as_start_path(start: Union[None, _PathType]) -> Path:
-    if start is None:
-        return Path.cwd()
-    if not isinstance(start, Path):
-        start = Path(start)
-    # TODO: consider `start = start.resolve()`
-    return start
+def as_start_path(start: Optional[_PathType]) -> Path:
+    """Convert path argument into normalised Path object."""
+    if start is not None:
+        return Path(start).expanduser().resolve()
+    return Path.cwd().resolve()
 
 
 def find_root_with_reason(
@@ -42,7 +40,6 @@ def find_root_with_reason(
     # Prepare inputs
     criterion = _as_root_criterion(criterion)
     start = as_start_path(start)
-
     # Check start
     if start.is_dir() and criterion(start):
         return start, "Pass"
