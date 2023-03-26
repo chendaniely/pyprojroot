@@ -30,6 +30,7 @@ dev = [
     "flake8~=3.8.4",
     "twine~=4.0.2",
     "build~=0.10.0",
+    "tox~=4.4.7"
 ]
 test = [
     "pytest>=6.2.5",
